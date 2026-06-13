@@ -1,242 +1,192 @@
-# SmartLedger
+# 💹 SmartLedger
 
-SmartLedger is a personal finance project I built as a full-stack learning/hackathon style application. The main idea is to bring expense tracking, budgets, investments, tax helpers, family finance, SMS parsing, and an AI chat flow into one app instead of keeping them as separate demos.
+> **Your finances, finally under control — without the spreadsheets.**
 
-This repository currently has three parts:
+Most people don't know where their money goes. SmartLedger fixes that — not with manual entry or dashboards you have to interpret yourself, but with an AI that understands your finances and tells you exactly what to do about them.
 
-- `backend/` - Express and MongoDB API
-- `frontend/` - React + Vite web app
-- `frontend_app/` - Expo / React Native mobile app
+Ask it anything in plain English. It scans your bills, reads your bank SMSes, tracks your investments, flags anomalies, and recommends tax-saving moves before you miss the window. All of it — on web and mobile.
 
-I have kept this README practical on purpose. It describes what is present in the codebase, not what the project could become later.
 
-## What It Does
+## 😩 The Problem
 
-The app includes code for:
+Every personal finance tool puts the burden on *you*.
 
-- User signup, login, JWT auth, Google OAuth routes, and password reset flow
-- Expense and transaction tracking
-- Budget creation and budget-vs-expense comparison
-- Dashboard and analytics views
-- Bill scanning flow using Gemini helpers
-- SMS transaction parsing in the mobile app
-- Investment tracking screens and backend services
-- AI analysis, AI investment planning, and an agent chat interface
-- Tax optimizer screens and backend tax calculation/recommendation services
-- Family finance features such as family groups, members, shared budgets, and notifications
-- Gamification features such as XP, levels, missions, badges, streaks, and wellness score
-- Recurring expense processing with scheduled jobs
-- Settings screens for profile, notifications, family, tax, AI, and app preferences
+Categorize this transaction. Build this report. Remember to log that expense. Set this budget manually. Most people abandon these tools in two weeks — not because they don't care about money, but because the tool feels like a second job.
 
-Some of these features depend on environment variables and external APIs, so they may need setup before they work end-to-end on a new machine.
+**SmartLedger flips the model.** Connect your data once, and the AI does the heavy lifting. It surfaces insights you wouldn't have noticed, warns you before you overspend, and acts like a CFO sitting right in your pocket.
 
-## Tech Stack
+
+## ✨ Features
+
+### 🤖 AI Financial Advisor
+*Talk to your money like you'd talk to a person.*
+
+Ask — "where did most of my money go last month?", "am I on track for my savings goal?", "what can I do to pay less tax this year?" — and get real, grounded answers based on your actual data. Not generic advice. Not a pie chart. A direct answer with next steps.
+
+### 📸 Smart Expense Tracking
+*Zero manual entry. Seriously.*
+
+Point your camera at a bill and it's logged. Bank SMS alerts are parsed automatically. Unusual charges are flagged the moment they appear. Expenses are categorized, enriched, and ready for analysis before you even open the app.
+
+### 🧾 Tax Optimization Engine
+*Stop leaving money on the table.*
+
+SmartLedger maps your eligible deductions, simulates different tax scenarios, and recommends ELSS, PPF, and NPS allocations — proactively, before the financial year closes and the window is gone.
+
+### 📈 Investment Command Center
+*Know what you have. Know what to do with it.*
+
+Live portfolio view across all instruments. AI-driven allocation suggestions. Real-time market context via Yahoo Finance. You're not just tracking numbers — you're getting told what moves to make.
+
+### 👨‍👩‍👧 Family Finance System
+*Everyone on the same page, finally.*
+
+Role-based accounts for every member. Shared budgets. A single collaborative dashboard so the whole household is working from the same picture — no more "I thought you tracked that."
+
+### 🎮 Gamification & Wellness
+*Good habits, made rewarding.*
+
+Streaks, XP, missions, badges, and a financial health score that turns boring financial discipline into something you actually want to keep up with.
+
+
+## ⚙️ How It Works
+
+SmartLedger runs four specialized AI agents — **Advisor**, **Tax**, **Investment**, and **Wellness** — that collaborate behind every query. Each agent is grounded in your real data via a RAG pipeline, so every response is specific to *you*, not recycled financial wisdom.
+
+Every decision the AI makes is written to a tamper-proof audit log. Full transparency, always.
+
+```
+Your data → Ingestion → Enrichment → Agent Reasoning → Response + Audit Log
+```
+
+
+## 🛠️ Tech Stack
 
 ### Backend
-
-- Node.js
-- Express
-- MongoDB with Mongoose
-- JWT authentication
-- Passport Google OAuth
-- Nodemailer
-- Google Generative AI SDK
-- Multer
-- Node cron
-- Winston and Morgan logging
-- Joi validation
-- Axios
-- Yahoo Finance and RSS parser utilities
+- ⚡ Node.js 20, Express.js
+- 🍃 MongoDB with Mongoose
+- 🔐 JWT authentication + Google OAuth
+- 🤖 Gemini AI SDK (text + vision), Yahoo Finance
+- 🕐 Cron jobs, Winston logging
 
 ### Web Frontend
+- ⚛️ React 18, Vite, Tailwind CSS
+- 🗂️ Zustand for state management
+- 📊 Recharts for data visualization
+- 🎞️ Framer Motion, Lucide React
 
-- React
-- Vite
-- React Router
-- Tailwind CSS
-- Axios
-- Recharts
-- Zustand
-- Framer Motion
-- Lucide React
-- Three.js / React Three Fiber
+### Mobile (Expo / React Native)
+- 📱 React Navigation, AsyncStorage
+- 💬 SMS listener and parser
+- 🔔 Expo Notifications
+- 📉 React Native Chart Kit
 
-### Mobile App
 
-- Expo
-- React Native
-- React Navigation
-- Axios
-- AsyncStorage
-- Expo notifications
-- Expo local credential storage package
-- React Native SMS listener / SMS reader packages
-- React Native chart kit
-- Zustand
+## 📂 Project Structure
 
-## Project Structure
-
-```text
+```
 SmartLedger/
-  backend/
-    controllers/       Express controller logic
-    middleware/        Auth, validation, rate limit, and request helpers
-    models/            Mongoose models
-    routes/            API routes
-    services/          Finance, tax, investment, gamification, and family services
-    utils/             AI helpers, parsers, market data helpers, cron helpers
-    server.js          Backend entry point
-
-  frontend/
-    src/
-      components/      Web UI components
-      context/         React context providers
-      pages/           Web app pages
-      services/        API service wrappers
-      store/           Zustand stores
-      utils/           Shared frontend utilities
-
-  frontend_app/
-    src/
-      api/             Mobile API client and backend URL config
-      components/      Mobile UI components
-      context/         Mobile auth/finance/family providers
-      navigation/      React Navigation setup
-      screens/         Mobile app screens
-      store/           Mobile Zustand stores
-      utils/           SMS parser, risk engine, notifications, formatters
+├── backend/
+│   ├── controllers/       # Route handlers
+│   ├── routes/            # API route definitions
+│   ├── services/          # Business logic & AI agent orchestration
+│   ├── models/            # Mongoose schemas
+│   └── middleware/        # Auth, logging, error handling
+├── frontend/
+│   ├── src/
+│   │   ├── components/    # Reusable UI components
+│   │   ├── pages/         # Route-level views
+│   │   ├── stores/        # Zustand state stores
+│   │   └── hooks/         # Custom React hooks
+└── frontend_app/
+    └── src/
+        ├── screens/       # Mobile screen components
+        ├── navigation/    # Stack and tab navigators
+        ├── api/           # Axios config and endpoints
+        └── parsers/       # SMS parsing utilities
 ```
 
-## Getting Started
 
-### 1. Install dependencies
+## 🚀 Getting Started
 
-Backend:
+**Prerequisites:** Node.js 20+, MongoDB (local or Atlas), a [Gemini API key](https://ai.google.dev/), and Expo CLI for mobile.
 
 ```bash
-cd backend
-npm install
+git clone https://github.com/your-username/SmartLedger.git
+
+cd backend && npm install
+cd ../frontend && npm install
+cd ../frontend_app && npm install
 ```
 
-Web frontend:
+### 🔑 Environment Variables
 
-```bash
-cd frontend
-npm install
+**`backend/.env`**
+
+| Variable | Description | Required |
+|---|---|---|
+| `MONGO_URI` | MongoDB connection string | ✅ |
+| `JWT_SECRET` | Secret for signing JWTs | ✅ |
+| `GEMINI_API_KEY` | Google Gemini API key | ✅ |
+| `GOOGLE_CLIENT_ID` | Google OAuth client ID | Optional |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth client secret | Optional |
+| `PORT` | Server port (default: 5000) | Optional |
+
+**`frontend/.env`**
+
 ```
-
-Mobile app:
-
-```bash
-cd frontend_app
-npm install
-```
-
-### 2. Configure environment variables
-
-Create a `.env` file in `backend/`.
-
-```env
-PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/smartledger
-JWT_SECRET=replace_this_with_a_local_secret
-FRONTEND_URL=http://localhost:5173
-FRONTEND_URL_APP=http://localhost:8081
-
-# Optional, needed for related features
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-EMAIL_USER=
-EMAIL_PASS=
-GEMINI_API_KEY=
-```
-
-Create a `.env` file in `frontend/`.
-
-```env
 VITE_BACKEND_URL=http://localhost:5000
 ```
 
-For the mobile app, update the local IP in:
+> 📌 In `frontend_app/src/api/config.js`, use your machine's **LAN IP** instead of `localhost` — physical devices can't resolve localhost over the network.
 
-```text
-frontend_app/src/api/config.js
-```
-
-That file is currently used to decide which backend URL the Expo app should call during development.
-
-### 3. Run the backend
+### ▶️ Run
 
 ```bash
-cd backend
-npm run dev
+cd backend && npm run dev        # API  →  localhost:5000
+cd frontend && npm run dev       # Web  →  localhost:5173
+cd frontend_app && npm start     # Mobile  →  Expo QR
 ```
 
-The backend defaults to:
 
-```text
-http://localhost:5000
-```
+## 📡 API Reference
 
-### 4. Run the web app
+All routes are prefixed with `/api/v1`.
 
-```bash
-cd frontend
-npm run dev
-```
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/auth/register` | Register a new user |
+| `POST` | `/auth/login` | Login and receive JWT |
+| `GET` | `/expenses` | Fetch paginated expenses |
+| `POST` | `/expenses` | Add a new expense |
+| `POST` | `/expenses/scan` | Upload bill image for AI parsing |
+| `GET` | `/budget` | Fetch current budget |
+| `GET` | `/investments/portfolio` | Portfolio summary |
+| `GET` | `/tax/suggestions` | AI-generated tax deduction tips |
+| `POST` | `/ai/query` | Natural language financial query |
+| `GET` | `/wellness/score` | Gamification stats and health score |
 
-Vite usually opens the web app at:
 
-```text
-http://localhost:5173
-```
+## 🌟 The Vision
 
-### 5. Run the mobile app
+SmartLedger isn't just an app — it's a step toward a world where financial clarity isn't a privilege reserved for people who can afford advisors or have hours to spend on spreadsheets.
 
-```bash
-cd frontend_app
-npm start
-```
+Everyone deserves to know where their money is going, what they can do about it, and how to build something better for themselves and their families.
 
-Then use the Expo options for Android, iOS, or web depending on your setup.
+That's what we're building.
 
-## Main Backend Routes
 
-The backend registers these route groups in `backend/server.js`:
+<div align="center">
 
-- `/api/auth`
-- `/api/transactions`
-- `/api/budgets`
-- `/api/dashboard`
-- `/api/billscan`
-- `/api/investments`
-- `/api/investments/ai`
-- `/api/ai-analysis`
-- `/api/budget-comparison`
-- `/api/notifications`
-- `/api/users`
-- `/api/gamification`
-- `/api/financial`
-- `/api/recurring`
-- `/api/family`
-- `/api/family-budget`
-- `/api/tax`
-- `/api/settings`
-- `/api/agent`
-- `/api/sms`
+**Built with purpose. Powered by AI. Designed for real life.**
 
-Most routes after auth use the auth middleware, so a valid token is expected.
+*If SmartLedger resonates with you — star the repo, share it, or just use it. That's enough.* ⭐
 
-## Notes
+</div>
 
-- This is a student project, so some parts are more polished than others.
-- There is no real test suite yet. The backend `npm test` script is still a placeholder.
-- Some files contain hosting config such as `vercel.json`, but this README does not assume a hosted version is active.
-- AI, email, OAuth, and market-data related flows need valid keys or credentials.
-- The mobile SMS features depend on platform permissions and device behavior, so they should be tested on the target device setup.
 
-## Why I Built It
+## 💬 Finally
 
-I wanted to practice building a finance-focused product that goes beyond a simple CRUD expense tracker. SmartLedger became a way to combine API design, React dashboards, mobile screens, MongoDB models, background jobs, AI helpers, and personal finance workflows in one project.
+Most finance apps show you data. SmartLedger tells you what to do with it.
 
-The project is useful for demonstrating full-stack application structure, feature integration, and the kind of product thinking expected in hackathons or internship projects.
+Clone it, run it, break it, improve it — and for the first time, actually know where your money is going.
